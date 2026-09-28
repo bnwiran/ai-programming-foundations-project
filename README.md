@@ -44,6 +44,10 @@ If dependencies change, regenerate it with:
 pip freeze > requirements.txt
 ```
 
+### Git Workflow
+
+For each task, bug fixes, feature implemention, etc., a new branch should be created. Then when code changes are done, push the branch and create a pull request. After review and approval, merge the branch to main.
+
 ## Bias & Data Quality Considerations
 
 A few cleaning choices in this workflow carry bias risk worth flagging. Rows missing `name` or `host_name` (37 rows) were dropped rather than imputed — a small change, but any row removal is a choice that can shift results slightly. More significantly, high-price listings (up to $10,000) and unusually long `minimum_nights` values (up to 1,250) were deliberately kept in the dataset rather than capped or removed, since most appear to be real listings rather than errors. This is a reasonable choice for descriptive analysis, but it means these outliers would need to be revisited before using this data for something like a price-prediction model, where they could disproportionately skew results. Small subgroups, like Staten Island (176 listings), are also more sensitive to individual outliers than larger boroughs — a single high-price listing was enough to noticeably shift that group's average. Full detail on these decisions is in `module_summary.pdf`.
